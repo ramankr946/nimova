@@ -7,378 +7,116 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --charcoal:  #2C3E50;
-    --blue:      #5B8FA8;
-    --amber:     #F4A95B;
-    --sage:      #A8B5A2;
-    --blush:     #F2E8E4;
-    --white:     #FAF9F7;
+    --charcoal: #2C3E50;
+    --blue:     #5B8FA8;
+    --amber:    #F4A95B;
+    --sage:     #A8B5A2;
+    --blush:    #F2E8E4;
+    --white:    #FAF9F7;
     --light-blue:#D6E8F2;
-    --light-amb: #FEF0DC;
-    --light-sage:#EAF0E9;
-    --light-bls: #F9F2EF;
-    --mid-grey:  #E5E5E5;
+    --light-amb:#FEF0DC;
+    --mid-grey: #E5E5E5;
   }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--white); font-family:'DM Sans',sans-serif; color:var(--charcoal); }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  header { background:var(--charcoal); padding:52px 64px 44px; position:relative; overflow:hidden; }
+  header::before { content:''; position:absolute; top:-60px; right:-60px; width:320px; height:320px; border-radius:50%; background:radial-gradient(circle,rgba(91,143,168,.25),transparent 70%); }
+  header::after  { content:''; position:absolute; bottom:-40px; left:200px; width:200px; height:200px; border-radius:50%; background:radial-gradient(circle,rgba(244,169,91,.18),transparent 70%); }
+  .header-tag { font-size:10px; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:var(--amber); margin-bottom:16px; }
+  header h1 { font-family:'Cormorant Garamond',serif; font-size:clamp(34px,5vw,56px); font-weight:300; color:var(--white); line-height:1.1; margin-bottom:10px; }
+  header h1 em { font-style:italic; color:var(--amber); }
+  header p { font-size:13px; color:rgba(250,249,247,.5); font-weight:300; }
+  .header-meta { display:flex; gap:24px; margin-top:32px; flex-wrap:wrap; }
+  .meta-pill { background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.12); border-radius:4px; padding:7px 14px; font-size:11px; color:rgba(250,249,247,.7); letter-spacing:.5px; }
+  .meta-pill strong { color:var(--amber); font-weight:600; }
 
-  body {
-    background: var(--white);
-    font-family: 'DM Sans', sans-serif;
-    color: var(--charcoal);
-    min-height: 100vh;
-  }
+  .nav-tabs { background:var(--charcoal); padding:0 64px; border-top:1px solid rgba(255,255,255,.06); display:flex; overflow-x:auto; }
+  .nav-tab { padding:14px 22px; font-size:12px; font-weight:500; letter-spacing:1px; text-transform:uppercase; color:rgba(250,249,247,.4); cursor:pointer; border-bottom:2px solid transparent; white-space:nowrap; transition:all .2s; }
+  .nav-tab:hover { color:rgba(250,249,247,.75); }
+  .nav-tab.active { color:var(--amber); border-bottom-color:var(--amber); }
 
-  /* ── HEADER ── */
-  header {
-    background: var(--charcoal);
-    padding: 56px 64px 48px;
-    position: relative;
-    overflow: hidden;
-  }
-  header::before {
-    content: '';
-    position: absolute;
-    top: -60px; right: -60px;
-    width: 320px; height: 320px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(91,143,168,0.25), transparent 70%);
-  }
-  header::after {
-    content: '';
-    position: absolute;
-    bottom: -40px; left: 200px;
-    width: 200px; height: 200px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(244,169,91,0.18), transparent 70%);
-  }
-  .header-tag {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--amber);
-    margin-bottom: 16px;
-  }
-  header h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(36px, 5vw, 58px);
-    font-weight: 300;
-    color: var(--white);
-    line-height: 1.1;
-    margin-bottom: 12px;
-  }
-  header h1 em {
-    font-style: italic;
-    color: var(--amber);
-  }
-  header p {
-    font-size: 14px;
-    color: rgba(250,249,247,0.55);
-    font-weight: 300;
-    letter-spacing: 0.3px;
-  }
-  .header-meta {
-    display: flex;
-    gap: 32px;
-    margin-top: 36px;
-  }
-  .meta-pill {
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 4px;
-    padding: 8px 16px;
-    font-size: 11px;
-    color: rgba(250,249,247,0.7);
-    letter-spacing: 0.5px;
-  }
-  .meta-pill strong { color: var(--amber); font-weight: 600; }
+  main { padding:52px 64px; max-width:1440px; }
+  .section { display:none; }
+  .section.active { display:block; }
 
-  /* ── NAV TABS ── */
-  .nav-tabs {
-    background: var(--charcoal);
-    padding: 0 64px;
-    border-top: 1px solid rgba(255,255,255,0.06);
-    display: flex;
-    gap: 0;
-    overflow-x: auto;
-  }
-  .nav-tab {
-    padding: 14px 22px;
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: rgba(250,249,247,0.4);
-    cursor: pointer;
-    border-bottom: 2px solid transparent;
-    white-space: nowrap;
-    transition: all 0.2s;
-  }
-  .nav-tab:hover { color: rgba(250,249,247,0.75); }
-  .nav-tab.active {
-    color: var(--amber);
-    border-bottom-color: var(--amber);
-  }
+  .cat-label { display:inline-flex; align-items:center; gap:8px; font-size:10px; font-weight:600; letter-spacing:2.5px; text-transform:uppercase; color:var(--blue); margin-bottom:8px; }
+  .cat-label::before { content:''; display:block; width:24px; height:1px; background:var(--blue); }
+  .section-title { font-family:'Cormorant Garamond',serif; font-size:36px; font-weight:300; margin-bottom:6px; }
+  .section-sub { font-size:13px; color:#888; margin-bottom:32px; font-weight:300; }
+  .nimova-note { background:linear-gradient(135deg,var(--light-blue),var(--light-amb)); border-left:3px solid var(--blue); border-radius:0 8px 8px 0; padding:14px 20px; font-size:12.5px; margin-bottom:36px; line-height:1.6; }
+  .nimova-note strong { color:var(--blue); }
 
-  /* ── MAIN ── */
-  main { padding: 56px 64px; max-width: 1400px; }
+  .brand-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(360px,1fr)); gap:28px; margin-bottom:56px; }
 
-  .section { display: none; }
-  .section.active { display: block; }
+  .brand-card { background:#fff; border-radius:14px; overflow:hidden; border:1px solid var(--mid-grey); transition:transform .25s,box-shadow .25s; animation:fadeUp .5s ease both; }
+  .brand-card:hover { transform:translateY(-4px); box-shadow:0 18px 44px rgba(44,62,80,.1); }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+  .brand-card:nth-child(2){animation-delay:.08s}
+  .brand-card:nth-child(3){animation-delay:.16s}
+  .brand-card:nth-child(4){animation-delay:.24s}
 
-  /* ── CATEGORY LABEL ── */
-  .cat-label {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: var(--blue);
-    margin-bottom: 8px;
-  }
-  .cat-label::before {
-    content: '';
-    display: block;
-    width: 24px; height: 1px;
-    background: var(--blue);
-  }
-  .section-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 38px;
-    font-weight: 300;
-    color: var(--charcoal);
-    margin-bottom: 6px;
-  }
-  .section-sub {
-    font-size: 13px;
-    color: #888;
-    margin-bottom: 40px;
-    font-weight: 300;
-  }
-  .nimova-note {
-    background: linear-gradient(135deg, var(--light-blue), var(--light-amb));
-    border-left: 3px solid var(--blue);
-    border-radius: 0 8px 8px 0;
-    padding: 14px 20px;
-    font-size: 12.5px;
-    color: var(--charcoal);
-    margin-bottom: 40px;
-    line-height: 1.6;
-  }
-  .nimova-note strong { color: var(--blue); }
+  .card-image-wrap { height:180px; overflow:hidden; background:var(--mid-grey); position:relative; }
+  .card-image-wrap img { width:100%; height:100%; object-fit:cover; transition:transform .4s; }
+  .brand-card:hover .card-image-wrap img { transform:scale(1.04); }
+  .img-fallback { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-family:'Cormorant Garamond',serif; font-size:44px; font-weight:300; color:rgba(44,62,80,.2); background:linear-gradient(135deg,#f0ede9,#e8e3dd); }
 
-  /* ── BRAND GRID ── */
-  .brand-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-    gap: 24px;
-    margin-bottom: 60px;
-  }
+  .tier-badge { position:absolute; top:12px; right:12px; padding:4px 10px; border-radius:20px; font-size:10px; font-weight:600; letter-spacing:1px; text-transform:uppercase; }
+  .tier-premium { background:var(--charcoal); color:var(--amber); }
+  .tier-mid     { background:var(--blue); color:#fff; }
+  .tier-luxury  { background:#1a1a1a; color:#d4af6f; }
 
-  /* ── BRAND CARD ── */
-  .brand-card {
-    background: #fff;
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid var(--mid-grey);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-    animation: fadeUp 0.5s ease both;
-  }
-  .brand-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 16px 40px rgba(44,62,80,0.1);
-  }
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  .brand-card:nth-child(2) { animation-delay: 0.08s; }
-  .brand-card:nth-child(3) { animation-delay: 0.16s; }
-  .brand-card:nth-child(4) { animation-delay: 0.24s; }
-  .brand-card:nth-child(5) { animation-delay: 0.32s; }
+  .card-body { padding:18px 20px 0; }
+  .brand-name { font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:600; margin-bottom:2px; }
+  .brand-origin { font-size:11px; color:#aaa; letter-spacing:.5px; margin-bottom:10px; }
+  .brand-desc { font-size:12.5px; line-height:1.65; color:#555; margin-bottom:12px; }
 
-  .card-image-wrap {
-    height: 200px;
-    overflow: hidden;
-    background: var(--mid-grey);
-    position: relative;
-  }
-  .card-image-wrap img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    transition: transform 0.4s ease;
-  }
-  .brand-card:hover .card-image-wrap img { transform: scale(1.04); }
-  .card-image-wrap .img-fallback {
-    position: absolute; inset: 0;
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 42px;
-    font-weight: 300;
-    color: rgba(44,62,80,0.25);
-    background: linear-gradient(135deg, #f0ede9, #e8e3dd);
-  }
+  .brand-stats { display:grid; grid-template-columns:1fr 1fr; gap:7px; margin-bottom:12px; }
+  .stat { background:var(--white); border:1px solid var(--mid-grey); border-radius:6px; padding:7px 10px; }
+  .stat-label { font-size:9px; text-transform:uppercase; letter-spacing:1.5px; color:#aaa; margin-bottom:2px; }
+  .stat-value { font-size:12.5px; font-weight:600; }
 
-  .tier-badge {
-    position: absolute;
-    top: 12px; right: 12px;
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-  }
-  .tier-premium  { background: var(--charcoal); color: var(--amber); }
-  .tier-mid      { background: var(--blue); color: #fff; }
-  .tier-mass     { background: var(--sage); color: var(--charcoal); }
-  .tier-luxury   { background: #1a1a1a; color: #d4af6f; }
+  .pkg-label { font-size:10px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase; color:var(--sage); margin-bottom:5px; }
+  .pkg-desc { font-size:12px; color:#666; line-height:1.5; margin-bottom:12px; }
 
-  .card-body { padding: 20px 22px 22px; }
+  .tag-row { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:0; padding-bottom:14px; }
+  .tag { background:var(--white); border:1px solid var(--mid-grey); border-radius:3px; padding:3px 8px; font-size:10.5px; color:#666; }
+  .tag.highlight { background:var(--light-amb); border-color:var(--amber); color:#9a6b1f; }
+  .tag.warning   { background:#fef2f2; border-color:#f5c6c6; color:#c0392b; }
 
-  .brand-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 22px;
-    font-weight: 600;
-    color: var(--charcoal);
-    margin-bottom: 2px;
-  }
-  .brand-origin {
-    font-size: 11px;
-    color: #aaa;
-    letter-spacing: 0.5px;
-    margin-bottom: 12px;
-  }
-  .brand-desc {
-    font-size: 12.5px;
-    line-height: 1.65;
-    color: #555;
-    margin-bottom: 16px;
-  }
+  /* PACKAGING SECTION */
+  .packaging-section { background:#fafafa; border-top:1px solid var(--mid-grey); padding:14px 20px 16px; }
+  .pkg-section-title { font-size:10px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--charcoal); margin-bottom:12px; display:flex; align-items:center; gap:8px; }
+  .pkg-section-title::after { content:''; flex:1; height:1px; background:var(--mid-grey); }
 
-  .brand-stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    margin-bottom: 16px;
-  }
-  .stat {
-    background: var(--white);
-    border: 1px solid var(--mid-grey);
-    border-radius: 6px;
-    padding: 8px 10px;
-  }
-  .stat-label {
-    font-size: 9px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: #aaa;
-    margin-bottom: 3px;
-  }
-  .stat-value {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--charcoal);
-  }
+  .pkg-gallery { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:12px; }
+  .pkg-gallery a { display:block; border-radius:7px; overflow:hidden; border:1px solid var(--mid-grey); text-decoration:none; transition:opacity .2s; }
+  .pkg-gallery a:hover { opacity:.85; }
+  .pkg-gallery img { width:100%; height:96px; object-fit:cover; display:block; }
+  .gallery-label { font-size:9px; text-align:center; padding:4px 6px; color:#888; background:#f5f5f5; }
 
-  .pkg-label {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--sage);
-    margin-bottom: 6px;
-  }
-  .pkg-desc {
-    font-size: 12px;
-    color: #666;
-    line-height: 1.5;
-    margin-bottom: 14px;
-  }
+  /* ACTION BUTTONS */
+  .card-actions { display:grid; grid-template-columns:1fr 1fr; gap:8px; padding:0 20px 18px; }
+  .action-btn { display:flex; align-items:center; justify-content:center; gap:6px; padding:9px 10px; border-radius:7px; font-size:10.5px; font-weight:600; letter-spacing:.5px; text-decoration:none; transition:all .2s; text-transform:uppercase; }
+  .btn-video  { background:#ff0000; color:#fff; }
+  .btn-video:hover { background:#cc0000; }
+  .btn-amazon { background:var(--charcoal); color:#fff; }
+  .btn-amazon:hover { background:#1a2a38; }
+  .btn-brand  { background:var(--light-blue); color:var(--blue); border:1px solid var(--blue); }
+  .btn-brand:hover { background:var(--blue); color:#fff; }
+  .btn-full   { grid-column:1/-1; }
+  .action-btn svg { width:13px; height:13px; flex-shrink:0; }
 
-  .tag-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-bottom: 16px;
-  }
-  .tag {
-    background: var(--white);
-    border: 1px solid var(--mid-grey);
-    border-radius: 3px;
-    padding: 3px 8px;
-    font-size: 10.5px;
-    color: #666;
-  }
-  .tag.highlight { background: var(--light-amb); border-color: var(--amber); color: #9a6b1f; }
-  .tag.warning   { background: #fef2f2; border-color: #f5c6c6; color: #c0392b; }
+  /* POSITIONING ROW */
+  .positioning-row { background:var(--charcoal); border-radius:12px; padding:28px 32px; margin-bottom:56px; display:grid; grid-template-columns:1fr 1fr 1fr; gap:24px; }
+  .pos-label { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--amber); margin-bottom:8px; }
+  .pos-title { font-family:'Cormorant Garamond',serif; font-size:18px; color:var(--white); margin-bottom:8px; }
+  .pos-desc  { font-size:12px; color:rgba(250,249,247,.5); line-height:1.6; }
 
-  .learn-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--blue);
-    text-decoration: none;
-    padding: 8px 14px;
-    border: 1px solid var(--light-blue);
-    border-radius: 6px;
-    transition: all 0.2s;
-  }
-  .learn-link:hover {
-    background: var(--light-blue);
-    border-color: var(--blue);
-  }
-  .learn-link svg { width: 12px; height: 12px; }
-
-  /* ── NIMOVA POSITIONING ROW ── */
-  .positioning-row {
-    background: var(--charcoal);
-    border-radius: 12px;
-    padding: 32px 36px;
-    margin-bottom: 60px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 24px;
-  }
-  .pos-item {}
-  .pos-label {
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--amber);
-    margin-bottom: 8px;
-  }
-  .pos-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 18px;
-    color: var(--white);
-    margin-bottom: 8px;
-  }
-  .pos-desc {
-    font-size: 12px;
-    color: rgba(250,249,247,0.5);
-    line-height: 1.6;
-  }
-
-  /* ── DIVIDER ── */
-  .divider {
-    border: none;
-    border-top: 1px solid var(--mid-grey);
-    margin: 48px 0;
-  }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 768px) {
-    header, .nav-tabs, main { padding-left: 24px; padding-right: 24px; }
-    .brand-grid { grid-template-columns: 1fr; }
-    .positioning-row { grid-template-columns: 1fr; }
-    .header-meta { flex-wrap: wrap; gap: 12px; }
+  @media(max-width:768px){
+    header,.nav-tabs,main{padding-left:20px;padding-right:20px}
+    .brand-grid{grid-template-columns:1fr}
+    .positioning-row{grid-template-columns:1fr}
   }
 </style>
 </head>
@@ -386,153 +124,242 @@
 
 <header>
   <div class="header-tag">Nimova · Brand Intelligence Report</div>
-  <h1>Top Brands by <em>Category</em></h1>
-  <p>Packaging analysis · Price positioning · Key differentiators · Nimova opportunity mapping</p>
+  <h1>Top Brands + <em>Packaging</em></h1>
+  <p>Box imagery · Unboxing videos · Price positioning · Nimova opportunity mapping</p>
   <div class="header-meta">
     <div class="meta-pill">Prepared <strong>March 2026</strong></div>
     <div class="meta-pill">Markets <strong>UAE · India</strong></div>
     <div class="meta-pill">Categories <strong>Feeding · Bath · Travel · Nursery</strong></div>
-    <div class="meta-pill">Nimova Go-Live <strong>21 Apr 2026</strong></div>
+    <div class="meta-pill">Go-Live <strong>21 Apr 2026</strong></div>
   </div>
 </header>
 
 <div class="nav-tabs">
-  <div class="nav-tab active" onclick="showSection('feeding', this)">🍽 Feeding</div>
-  <div class="nav-tab" onclick="showSection('bath', this)">🛁 Bath</div>
-  <div class="nav-tab" onclick="showSection('travel', this)">🎒 Travel</div>
-  <div class="nav-tab" onclick="showSection('nursery', this)">🧺 Nursery</div>
+  <div class="nav-tab active" onclick="showSection('feeding',this)">🍽 Feeding</div>
+  <div class="nav-tab" onclick="showSection('bath',this)">🛁 Bath</div>
+  <div class="nav-tab" onclick="showSection('travel',this)">🎒 Travel</div>
+  <div class="nav-tab" onclick="showSection('nursery',this)">🧺 Nursery</div>
 </div>
 
 <main>
 
-<!-- ══════════════════════════════════════════════════════ FEEDING -->
+<!-- ══════════ FEEDING ══════════ -->
 <div id="feeding" class="section active">
   <div class="cat-label">Category 01</div>
   <h2 class="section-title">Feeding & Weaning</h2>
   <p class="section-sub">Silicone sets · bibs · weaning utensils · toddler tableware</p>
-
-  <div class="nimova-note">
-    <strong>Nimova Opportunity:</strong> The mid-premium feeding segment on Noon UAE and Amazon.ae is dominated by generic, weakly-branded sets in oversaturated primary colours. No single brand owns a cohesive identity across set + bib. Nimova's <strong>SoftStart Weaning Set</strong> (AED 85–110) and <strong>CatchAll Silicone Bib 2-pack</strong> (AED 45–65) enter with gift-ready packaging, LFGB cert on the front panel, and a brand palette (Dusty Sage, Blush Mist, Dusk Blue) that stands apart from everything in-market.
-  </div>
+  <div class="nimova-note"><strong>Nimova Opportunity:</strong> No single brand owns a cohesive identity across set + bib in the UAE mid-premium segment. Nimova's <strong>SoftStart Weaning Set</strong> (AED 85–110) and <strong>CatchAll Silicone Bib 2-pack</strong> (AED 45–65) enter with gift-ready packaging, LFGB cert on front panel, and a warm palette that stands apart from everything in-market.</div>
 
   <div class="brand-grid">
 
     <div class="brand-card">
       <div class="card-image-wrap">
-        <img src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=600&q=80" alt="Munchkin feeding set" onerror="this.style.display='none'">
+        <img src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=600&q=80" onerror="this.style.display='none'">
         <div class="img-fallback">M</div>
         <span class="tier-badge tier-premium">Premium</span>
       </div>
       <div class="card-body">
         <div class="brand-name">Munchkin</div>
-        <div class="brand-origin">USA · Est. 1991 · Global #1 in baby feeding accessories</div>
-        <div class="brand-desc">The dominant premium feeding brand globally. Known for C'est Silicone!™ self-feeding set — suction plate, bowl, easy-grip spoon. Packaging is clean retail white with bold product photography and strong cert callouts on front.</div>
+        <div class="brand-origin">USA · Est. 1991 · Global #1 baby feeding accessories</div>
+        <div class="brand-desc">Dominant premium feeding brand globally. C'est Silicone!™ self-feeding set is the category benchmark. Clean white retail packaging with bold product photography and cert callouts on front panel.</div>
         <div class="brand-stats">
           <div class="stat"><div class="stat-label">Price (AED)</div><div class="stat-value">AED 95–180</div></div>
           <div class="stat"><div class="stat-label">Rating</div><div class="stat-value">4.6★ avg</div></div>
-          <div class="stat"><div class="stat-label">Packaging</div><div class="stat-value">White retail box</div></div>
+          <div class="stat"><div class="stat-label">Box Style</div><div class="stat-value">White window box</div></div>
           <div class="stat"><div class="stat-label">UAE Presence</div><div class="stat-value">Noon + Amazon.ae</div></div>
         </div>
-        <div class="pkg-label">Packaging Style</div>
-        <div class="pkg-desc">Clean white windowed box, product visible through front. Bold colour-coded tabs by product line. BPA-free + dishwasher safe icons on front panel. Minimalist and trustworthy — but not gifting-focused.</div>
+        <div class="pkg-label">Box Look & Feel</div>
+        <div class="pkg-desc">Clean white windowed box — product visible through front. Bold colour-coded tabs by product line. BPA-free + dishwasher icons on front. Trustworthy but not gift-first.</div>
         <div class="tag-row">
-          <span class="tag highlight">Gift-box window</span>
+          <span class="tag highlight">Window box — product visible</span>
           <span class="tag">Cert icons front panel</span>
-          <span class="tag">Strong suction messaging</span>
           <span class="tag warning">Generic colourways</span>
         </div>
-        <a class="learn-link" href="https://www.munchkin.com/cest-silicone-self-feeding-set" target="_blank">
-          View brand <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 10L10 2M10 2H5M10 2v5"/></svg>
+      </div>
+      <div class="packaging-section">
+        <div class="pkg-section-title">📦 Packaging Reference</div>
+        <div class="pkg-gallery">
+          <a href="https://www.amazon.com/Munchkin-Silicone-Feeding-Toddler-Mealtime/dp/B0FC94TWDR" target="_blank">
+            <img src="https://m.media-amazon.com/images/I/71Q7F9vHaqL._AC_SL1500_.jpg" onerror="this.src='https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300&q=60'">
+            <div class="gallery-label">Box Front · click to see on Amazon</div>
+          </a>
+          <a href="https://www.amazon.com/Munchkin-Silicone-Feeding-Toddler-Mealtime/dp/B0FC94TWDR" target="_blank">
+            <img src="https://m.media-amazon.com/images/I/71VVBqFiMhL._AC_SL1500_.jpg" onerror="this.src='https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300&q=60'">
+            <div class="gallery-label">More box images on Amazon →</div>
+          </a>
+        </div>
+      </div>
+      <div class="card-actions">
+        <a class="action-btn btn-video" href="https://www.youtube.com/results?search_query=Munchkin+C%27est+Silicone+feeding+set+unboxing+box+packaging" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.5A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.8 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+          Unboxing Videos
+        </a>
+        <a class="action-btn btn-amazon" href="https://www.amazon.com/Munchkin-Silicone-Feeding-Toddler-Mealtime/dp/B0FC94TWDR" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+          All Box Images
+        </a>
+        <a class="action-btn btn-brand btn-full" href="https://www.munchkin.com/cest-silicone-self-feeding-set" target="_blank">
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 10L10 2M10 2H5M10 2v5"/></svg>
+          Visit Brand Site
         </a>
       </div>
     </div>
 
     <div class="brand-card">
       <div class="card-image-wrap">
-        <img src="https://images.unsplash.com/photo-1590779033100-9f60a05a013d?w=600&q=80" alt="Bumkins feeding" onerror="this.style.display='none'">
+        <img src="https://images.unsplash.com/photo-1590779033100-9f60a05a013d?w=600&q=80" onerror="this.style.display='none'">
         <div class="img-fallback">B</div>
         <span class="tier-badge tier-premium">Premium</span>
       </div>
       <div class="card-body">
         <div class="brand-name">Bumkins</div>
         <div class="brand-origin">USA · Est. 1989 · Strong identity brand</div>
-        <div class="brand-desc">Known for graphic-print silicone bibs and tableware. Strong visual identity with bold illustrated patterns. Premium positioning, gifting-friendly, and highly Instagrammable. Packaging reflects the fun-but-premium tone.</div>
+        <div class="brand-desc">Graphic-print silicone bibs and tableware. Bold illustrated patterns. Premium gifting-friendly positioning — every pack looks like it belongs in a gift bag. Sets the bib packaging benchmark.</div>
         <div class="brand-stats">
           <div class="stat"><div class="stat-label">Price (AED)</div><div class="stat-value">AED 70–145</div></div>
           <div class="stat"><div class="stat-label">Rating</div><div class="stat-value">4.5★ avg</div></div>
-          <div class="stat"><div class="stat-label">Packaging</div><div class="stat-value">Illustrated gift box</div></div>
+          <div class="stat"><div class="stat-label">Box Style</div><div class="stat-value">Illustrated kraft box</div></div>
           <div class="stat"><div class="stat-label">UAE Presence</div><div class="stat-value">Amazon.ae</div></div>
         </div>
-        <div class="pkg-label">Packaging Style</div>
-        <div class="pkg-desc">Colourful illustrated kraft box with the product and pattern front and centre. Feels like a gift straight off the shelf. Cert info on back. Uses seasonal colourways — strong hook for gifting occasions.</div>
+        <div class="pkg-label">Box Look & Feel</div>
+        <div class="pkg-desc">Colourful illustrated kraft box with product and pattern front and centre. Seasonal colourways — strong gifting hook. Cert info on back panel. Gift-first design from every angle.</div>
         <div class="tag-row">
           <span class="tag highlight">Gifting-first design</span>
           <span class="tag">Bold illustrated print</span>
-          <span class="tag">Seasonal colourways</span>
           <span class="tag warning">Higher price point</span>
         </div>
-        <a class="learn-link" href="https://www.bumkins.com/collections/silicone-bibs" target="_blank">
-          View brand <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 10L10 2M10 2H5M10 2v5"/></svg>
+      </div>
+      <div class="packaging-section">
+        <div class="pkg-section-title">📦 Packaging Reference</div>
+        <div class="pkg-gallery">
+          <a href="https://www.amazon.com/s?k=bumkins+silicone+bib" target="_blank">
+            <img src="https://m.media-amazon.com/images/I/81CfJML2uyL._AC_SL1500_.jpg" onerror="this.src='https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?w=300&q=60'">
+            <div class="gallery-label">Illustrated Kraft Box</div>
+          </a>
+          <a href="https://www.amazon.com/s?k=bumkins+silicone+bib" target="_blank">
+            <img src="https://m.media-amazon.com/images/I/71mFMa3IZAL._AC_SL1500_.jpg" onerror="this.src='https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=300&q=60'">
+            <div class="gallery-label">More box images on Amazon →</div>
+          </a>
+        </div>
+      </div>
+      <div class="card-actions">
+        <a class="action-btn btn-video" href="https://www.youtube.com/results?search_query=Bumkins+silicone+bib+unboxing+packaging+box" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.5A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.8 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+          Unboxing Videos
+        </a>
+        <a class="action-btn btn-amazon" href="https://www.amazon.com/s?k=bumkins+silicone+bib" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+          All Box Images
+        </a>
+        <a class="action-btn btn-brand btn-full" href="https://www.bumkins.com/collections/silicone-bibs" target="_blank">
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 10L10 2M10 2H5M10 2v5"/></svg>
+          Visit Brand Site
         </a>
       </div>
     </div>
 
     <div class="brand-card">
       <div class="card-image-wrap">
-        <img src="https://images.unsplash.com/photo-1565843708714-52ecf69ab81f?w=600&q=80" alt="Ezpz feeding" onerror="this.style.display='none'">
+        <img src="https://images.unsplash.com/photo-1565843708714-52ecf69ab81f?w=600&q=80" onerror="this.style.display='none'">
         <div class="img-fallback">ez</div>
         <span class="tier-badge tier-luxury">Luxury</span>
       </div>
       <div class="card-body">
         <div class="brand-name">ezpz</div>
-        <div class="brand-origin">USA · Est. 2014 · Design-led premium</div>
-        <div class="brand-desc">The brand that redefined baby mealtime with the iconic all-silicone Happy Mat (suction placemat + plate in one). Design-forward, neutral colours (sage, blush, sand), and the strongest brand identity in the category. Sets the visual benchmark for Nimova.</div>
+        <div class="brand-origin">USA · Est. 2014 · Design-led premium feeding</div>
+        <div class="brand-desc">Redefined baby mealtime with the iconic Happy Mat. Strongest brand identity in feeding. Matte kraft sleeve packaging in neutral tones — reads like design objects, not baby products. The Nimova SoftStart packaging aspiration.</div>
         <div class="brand-stats">
           <div class="stat"><div class="stat-label">Price (AED)</div><div class="stat-value">AED 120–250</div></div>
           <div class="stat"><div class="stat-label">Rating</div><div class="stat-value">4.7★ avg</div></div>
-          <div class="stat"><div class="stat-label">Packaging</div><div class="stat-value">Minimal matte sleeve</div></div>
+          <div class="stat"><div class="stat-label">Box Style</div><div class="stat-value">Matte kraft sleeve</div></div>
           <div class="stat"><div class="stat-label">UAE Presence</div><div class="stat-value">Amazon.ae (imported)</div></div>
         </div>
-        <div class="pkg-label">Packaging Style</div>
-        <div class="pkg-desc">Matte kraft sleeve with a single hero product image. Sage/blush/sand palette. Almost zero clutter — one cert badge, one headline, done. The packaging reads like design objects, not baby products. This is the brand Nimova's SoftStart should aspire to compete with at a lower price.</div>
+        <div class="pkg-label">Box Look & Feel</div>
+        <div class="pkg-desc">Matte kraft sleeve, single hero product image, sage/blush/sand palette. Almost zero clutter — one cert badge, one headline. Packaging feels like a premium design object. The Nimova benchmark at a lower price.</div>
         <div class="tag-row">
-          <span class="tag highlight">Best-in-class design</span>
+          <span class="tag highlight">Best-in-class packaging</span>
           <span class="tag">Neutral palette leader</span>
-          <span class="tag">Matte minimal packaging</span>
           <span class="tag warning">Premium price barrier</span>
         </div>
-        <a class="learn-link" href="https://ezpzfun.com" target="_blank">
-          View brand <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 10L10 2M10 2H5M10 2v5"/></svg>
+      </div>
+      <div class="packaging-section">
+        <div class="pkg-section-title">📦 Packaging Reference</div>
+        <div class="pkg-gallery">
+          <a href="https://www.amazon.com/ezpz-Happy-Mat-Grey/dp/B06XCQLRT9" target="_blank">
+            <img src="https://m.media-amazon.com/images/I/71rICFoCqML._AC_SL1500_.jpg" onerror="this.src='https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300&q=60'">
+            <div class="gallery-label">Matte Kraft Sleeve</div>
+          </a>
+          <a href="https://www.amazon.com/ezpz-Happy-Mat-Grey/dp/B06XCQLRT9" target="_blank">
+            <img src="https://m.media-amazon.com/images/I/71-0J8bRGHL._AC_SL1500_.jpg" onerror="this.src='https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?w=300&q=60'">
+            <div class="gallery-label">More box images on Amazon →</div>
+          </a>
+        </div>
+      </div>
+      <div class="card-actions">
+        <a class="action-btn btn-video" href="https://www.youtube.com/results?search_query=ezpz+happy+mat+unboxing+packaging+box+review" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.5A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.8 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+          Unboxing Videos
+        </a>
+        <a class="action-btn btn-amazon" href="https://www.amazon.com/ezpz-Happy-Mat-Grey/dp/B06XCQLRT9" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+          All Box Images
+        </a>
+        <a class="action-btn btn-brand btn-full" href="https://ezpzfun.com" target="_blank">
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 10L10 2M10 2H5M10 2v5"/></svg>
+          Visit Brand Site
         </a>
       </div>
     </div>
 
     <div class="brand-card">
       <div class="card-image-wrap">
-        <img src="https://images.unsplash.com/photo-1582562124811-c09040d0a901?w=600&q=80" alt="Tommee Tippee" onerror="this.style.display='none'">
+        <img src="https://images.unsplash.com/photo-1582562124811-c09040d0a901?w=600&q=80" onerror="this.style.display='none'">
         <div class="img-fallback">TT</div>
         <span class="tier-badge tier-mid">Mid-Market</span>
       </div>
       <div class="card-body">
         <div class="brand-name">Tommee Tippee</div>
-        <div class="brand-origin">UK · Est. 1965 · Trusted mass-premium</div>
-        <div class="brand-desc">Strong brand equity in UAE/GCC. Weaning starter kits widely stocked in Noon. Functional positioning, hospital-grade trust signals. Packaging is clinical and reliable — no gifting appeal. Nimova can win on visual warmth vs. Tommee's functional credibility.</div>
+        <div class="brand-origin">UK · Est. 1965 · Trusted mass-premium UAE</div>
+        <div class="brand-desc">Strong brand equity in UAE/GCC. Widely stocked on Noon. Clinical white/blue packaging — no gifting appeal. Nimova wins on visual warmth vs. Tommee's functional credibility.</div>
         <div class="brand-stats">
           <div class="stat"><div class="stat-label">Price (AED)</div><div class="stat-value">AED 55–130</div></div>
           <div class="stat"><div class="stat-label">Rating</div><div class="stat-value">4.4★ avg</div></div>
-          <div class="stat"><div class="stat-label">Packaging</div><div class="stat-value">Clinical white/blue box</div></div>
+          <div class="stat"><div class="stat-label">Box Style</div><div class="stat-value">Clinical white/blue</div></div>
           <div class="stat"><div class="stat-label">UAE Presence</div><div class="stat-value">Noon + Amazon.ae + LuLu</div></div>
         </div>
-        <div class="pkg-label">Packaging Style</div>
-        <div class="pkg-desc">Clean white with blue/teal branding. Strong cert hierarchy. Product photography on white bg. Zero gifting warmth — reads as pharmacy/medical. Strong trust but cold. Nimova's warm palette and nest-mark immediately differentiate.</div>
+        <div class="pkg-label">Box Look & Feel</div>
+        <div class="pkg-desc">Clean white with blue/teal branding. Strong cert hierarchy on front. Product photo on white background. Reads as pharmacy/medical — trustworthy but cold. Nimova's warm palette immediately differentiates.</div>
         <div class="tag-row">
-          <span class="tag">High brand awareness UAE</span>
-          <span class="tag">Strong cert visibility</span>
+          <span class="tag">High UAE brand awareness</span>
           <span class="tag warning">No gifting appeal</span>
           <span class="tag warning">Cold visual tone</span>
         </div>
-        <a class="learn-link" href="https://www.tommeetippee.com/en-ae" target="_blank">
-          View brand <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 10L10 2M10 2H5M10 2v5"/></svg>
+      </div>
+      <div class="packaging-section">
+        <div class="pkg-section-title">📦 Packaging Reference</div>
+        <div class="pkg-gallery">
+          <a href="https://www.amazon.com/s?k=tommee+tippee+weaning+starter+kit" target="_blank">
+            <img src="https://m.media-amazon.com/images/I/71SIXYRz9pL._AC_SL1500_.jpg" onerror="this.src='https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300&q=60'">
+            <div class="gallery-label">Weaning Starter Kit Box</div>
+          </a>
+          <a href="https://www.amazon.com/s?k=tommee+tippee+weaning+starter+kit" target="_blank">
+            <img src="https://m.media-amazon.com/images/I/71u8G5YiizL._AC_SL1500_.jpg" onerror="this.src='https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300&q=60'">
+            <div class="gallery-label">More box images on Amazon →</div>
+          </a>
+        </div>
+      </div>
+      <div class="card-actions">
+        <a class="action-btn btn-video" href="https://www.youtube.com/results?search_query=Tommee+Tippee+weaning+kit+unboxing+packaging+box" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.5A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.8 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+          Unboxing Videos
+        </a>
+        <a class="action-btn btn-amazon" href="https://www.amazon.com/s?k=tommee+tippee+weaning+starter+kit" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+          All Box Images
+        </a>
+        <a class="action-btn btn-brand btn-full" href="https://www.tommeetippee.com/en-ae" target="_blank">
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 10L10 2M10 2H5M10 2v5"/></svg>
+          Visit Brand Site (UAE)
         </a>
       </div>
     </div>
@@ -540,151 +367,176 @@
   </div>
 
   <div class="positioning-row">
-    <div class="pos-item">
-      <div class="pos-label">Where Nimova Sits</div>
-      <div class="pos-title">Between ezpz & Tommee Tippee</div>
-      <div class="pos-desc">Design-forward like ezpz, accessible like Tommee. AED 85–110 hits a sweet spot no brand currently occupies on UAE marketplaces.</div>
-    </div>
-    <div class="pos-item">
-      <div class="pos-label">Packaging Direction</div>
-      <div class="pos-title">Gift-ready, matte, warm</div>
-      <div class="pos-desc">Warm white window box with Amber accent band. Nest-mark embossed. LFGB badge front panel. Immediately premium vs. every generic competitor.</div>
-    </div>
-    <div class="pos-item">
-      <div class="pos-label">Key Advantage</div>
-      <div class="pos-title">Only branded mid-premium on Noon</div>
-      <div class="pos-desc">ezpz is largely absent from UAE marketplaces. Munchkin is premium-priced. Nimova owns the AED 85–110 branded slot that currently doesn't exist.</div>
-    </div>
+    <div class="pos-item"><div class="pos-label">Nimova Sits</div><div class="pos-title">Between ezpz & Tommee Tippee</div><div class="pos-desc">Design-forward like ezpz, accessible like Tommee. AED 85–110 owns a slot no brand currently occupies on UAE marketplaces.</div></div>
+    <div class="pos-item"><div class="pos-label">Packaging Direction</div><div class="pos-title">Gift-ready, matte, warm</div><div class="pos-desc">Warm white window box, Amber accent band, Nest-mark embossed. LFGB badge front panel. Immediately premium vs. every generic competitor.</div></div>
+    <div class="pos-item"><div class="pos-label">Key Advantage</div><div class="pos-title">Only branded mid-premium on Noon</div><div class="pos-desc">ezpz largely absent from UAE marketplaces. Munchkin premium-priced. Nimova owns the AED 85–110 branded slot that doesn't yet exist.</div></div>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════════════════ BATH -->
+<!-- ══════════ BATH ══════════ -->
 <div id="bath" class="section">
   <div class="cat-label">Category 02</div>
   <h2 class="section-title">Bath & Bathing Accessories</h2>
-  <p class="section-sub">Bath kneelers · foldable tubs · bath organisers · parent comfort</p>
-
-  <div class="nimova-note">
-    <strong>Nimova Opportunity:</strong> The bath kneeler and foldable tub categories on Amazon.ae are flooded with generic, unbranded products. The strongest competitor (Yalumo) has best-in-class specs but zero brand personality. Nimova's <strong>KneeEase Bath Set</strong> (AED 55–75) and <strong>FoldBath Newborn Tub</strong> (AED 95–130) enter with a brand narrative — "built for UAE apartments" — and retail-quality gift packaging that nothing else in market offers.
-  </div>
+  <p class="section-sub">Bath kneelers · foldable tubs · parent comfort</p>
+  <div class="nimova-note"><strong>Nimova Opportunity:</strong> The bath kneeler and foldable tub categories on Amazon.ae are flooded with unbranded products. Nimova's <strong>KneeEase Bath Set</strong> (AED 55–75) and <strong>FoldBath Newborn Tub</strong> (AED 95–130) are the only branded mid-premium options with retail-quality packaging.</div>
 
   <div class="brand-grid">
 
     <div class="brand-card">
       <div class="card-image-wrap">
-        <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600&q=80" alt="Skip Hop bath" onerror="this.style.display='none'">
+        <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600&q=80" onerror="this.style.display='none'">
         <div class="img-fallback">SH</div>
         <span class="tier-badge tier-premium">Premium</span>
       </div>
       <div class="card-body">
         <div class="brand-name">Skip Hop</div>
         <div class="brand-origin">USA · Est. 2003 · Design-led baby lifestyle</div>
-        <div class="brand-desc">The strongest design-led baby brand in the UAE market. Iconic animal-themed bath products, bath kneelers, and organisers. Packaging is playful but premium. Strong gifting positioning with coordinated product families. Dominant on noon.com in the travel category.</div>
+        <div class="brand-desc">Iconic animal-themed bath kneelers and organisers. Packaging is playful but premium — strong gifting positioning. Every pack looks like it belongs in a gift bag. Bath kneeler box is exactly what Nimova KneeEase should aspire to.</div>
         <div class="brand-stats">
           <div class="stat"><div class="stat-label">Price (AED)</div><div class="stat-value">AED 95–240</div></div>
           <div class="stat"><div class="stat-label">Rating</div><div class="stat-value">4.5★ avg</div></div>
-          <div class="stat"><div class="stat-label">Packaging</div><div class="stat-value">Illustrated retail box</div></div>
-          <div class="stat"><div class="stat-label">UAE Presence</div><div class="stat-value">Noon + Amazon.ae + BabyShop</div></div>
+          <div class="stat"><div class="stat-label">Box Style</div><div class="stat-value">Illustrated retail box</div></div>
+          <div class="stat"><div class="stat-label">UAE Presence</div><div class="stat-value">Noon + BabyShop</div></div>
         </div>
-        <div class="pkg-label">Packaging Style</div>
-        <div class="pkg-desc">Colourful window boxes with signature animal character (elephant, giraffe). White background, lots of negative space. Product photography + lifestyle. Every pack looks like it belongs in a gift bag. Sets a high visual bar for the bath category.</div>
+        <div class="pkg-label">Box Look & Feel</div>
+        <div class="pkg-desc">Colourful window boxes with signature animal character. White background, generous negative space. Product photography + lifestyle on box sides. Gift-ready from every angle.</div>
         <div class="tag-row">
-          <span class="tag highlight">Iconic animal characters</span>
+          <span class="tag highlight">Iconic animal character boxes</span>
           <span class="tag">Coordinated product family</span>
-          <span class="tag">Gift-ready packaging</span>
-          <span class="tag warning">Premium price limit</span>
+          <span class="tag warning">Premium price</span>
         </div>
-        <a class="learn-link" href="https://www.skiphop.com/pages/baby-bath" target="_blank">
-          View brand <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 10L10 2M10 2H5M10 2v5"/></svg>
+      </div>
+      <div class="packaging-section">
+        <div class="pkg-section-title">📦 Packaging Reference</div>
+        <div class="pkg-gallery">
+          <a href="https://www.amazon.com/s?k=skip+hop+baby+bath+kneeler+elbow+rest" target="_blank">
+            <img src="https://m.media-amazon.com/images/I/71D9jicZKzL._AC_SL1500_.jpg" onerror="this.src='https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=300&q=60'">
+            <div class="gallery-label">Bath Kneeler Box</div>
+          </a>
+          <a href="https://www.amazon.com/s?k=skip+hop+baby+bath+kneeler+elbow+rest" target="_blank">
+            <img src="https://m.media-amazon.com/images/I/71VpfZMf72L._AC_SL1500_.jpg" onerror="this.src='https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&q=60'">
+            <div class="gallery-label">More box images on Amazon →</div>
+          </a>
+        </div>
+      </div>
+      <div class="card-actions">
+        <a class="action-btn btn-video" href="https://www.youtube.com/results?search_query=Skip+Hop+baby+bath+kneeler+unboxing+packaging+box" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.5A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.8 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+          Unboxing Videos
+        </a>
+        <a class="action-btn btn-amazon" href="https://www.amazon.com/s?k=skip+hop+baby+bath+kneeler" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+          All Box Images
+        </a>
+        <a class="action-btn btn-brand btn-full" href="https://www.skiphop.com/pages/baby-bath" target="_blank">
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 10L10 2M10 2H5M10 2v5"/></svg>
+          Visit Brand Site
         </a>
       </div>
     </div>
 
     <div class="brand-card">
       <div class="card-image-wrap">
-        <img src="https://images.unsplash.com/photo-1545558014-8692077e9b5c?w=600&q=80" alt="Frida Baby bath" onerror="this.style.display='none'">
+        <img src="https://images.unsplash.com/photo-1545558014-8692077e9b5c?w=600&q=80" onerror="this.style.display='none'">
         <div class="img-fallback">FB</div>
         <span class="tier-badge tier-premium">Premium</span>
       </div>
       <div class="card-body">
         <div class="brand-name">Frida Baby</div>
-        <div class="brand-origin">USA · Est. 2014 · Cult-favourite parent brand</div>
-        <div class="brand-desc">Cult brand known for no-nonsense, honest baby products. Bath rinser, bath seat, baby tub. Packaging is bold with honest, humorous copy — "Because your back needed a break." Growing UAE presence on Amazon.ae. Sets the tone for parent-focused (not baby-focused) messaging.</div>
+        <div class="brand-origin">USA · Est. 2014 · Cult parent brand</div>
+        <div class="brand-desc">Cult brand with bold, honest baby products. Packaging is story-led — "Because your back needed a break." Sets the tone for parent-focused (not baby-focused) messaging. Nimova KneeEase packaging inspiration.</div>
         <div class="brand-stats">
           <div class="stat"><div class="stat-label">Price (AED)</div><div class="stat-value">AED 85–180</div></div>
           <div class="stat"><div class="stat-label">Rating</div><div class="stat-value">4.6★ avg</div></div>
-          <div class="stat"><div class="stat-label">Packaging</div><div class="stat-value">Bold illustrated box</div></div>
+          <div class="stat"><div class="stat-label">Box Style</div><div class="stat-value">Bold illustrated box</div></div>
           <div class="stat"><div class="stat-label">UAE Presence</div><div class="stat-value">Amazon.ae</div></div>
         </div>
-        <div class="pkg-label">Packaging Style</div>
-        <div class="pkg-desc">Dark background with bright illustrated characters and honest headlines. Copy-led — the packaging tells a story before you even open it. Cult-worthy. Nimova's "gift for the bathing parent" hook is directly inspired by Frida's parent-first messaging.</div>
+        <div class="pkg-label">Box Look & Feel</div>
+        <div class="pkg-desc">Dark background with bright illustrated characters and honest copy-led headlines. The packaging tells a story before you open it. Parent-first messaging — Nimova's KneeEase "Because the floor is not your friend" hook is directly inspired by this.</div>
         <div class="tag-row">
-          <span class="tag highlight">Parent-first messaging</span>
+          <span class="tag highlight">Parent-first copy on box</span>
           <span class="tag">Story-led packaging</span>
-          <span class="tag">Cult brand equity</span>
-          <span class="tag warning">Bold — may not suit UAE gifting</span>
+          <span class="tag warning">Bold tone may not suit UAE gifting</span>
         </div>
-        <a class="learn-link" href="https://fridababy.com/collections/bath" target="_blank">
-          View brand <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 10L10 2M10 2H5M10 2v5"/></svg>
+      </div>
+      <div class="packaging-section">
+        <div class="pkg-section-title">📦 Packaging Reference</div>
+        <div class="pkg-gallery">
+          <a href="https://www.amazon.com/s?k=frida+baby+bath+kneeler" target="_blank">
+            <img src="https://m.media-amazon.com/images/I/71LxHbr-pLL._AC_SL1500_.jpg" onerror="this.src='https://images.unsplash.com/photo-1545558014-8692077e9b5c?w=300&q=60'">
+            <div class="gallery-label">Bath Kneeler Box</div>
+          </a>
+          <a href="https://www.amazon.com/s?k=frida+baby+bath+kneeler" target="_blank">
+            <img src="https://m.media-amazon.com/images/I/61FXqQkQ0RL._AC_SL1500_.jpg" onerror="this.src='https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=300&q=60'">
+            <div class="gallery-label">More box images on Amazon →</div>
+          </a>
+        </div>
+      </div>
+      <div class="card-actions">
+        <a class="action-btn btn-video" href="https://www.youtube.com/results?search_query=Frida+Baby+bath+kneeler+unboxing+packaging+box+review" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.5A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.8 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+          Unboxing Videos
+        </a>
+        <a class="action-btn btn-amazon" href="https://www.amazon.com/s?k=frida+baby+bath+kneeler" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+          All Box Images
+        </a>
+        <a class="action-btn btn-brand btn-full" href="https://fridababy.com/collections/bath" target="_blank">
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 10L10 2M10 2H5M10 2v5"/></svg>
+          Visit Brand Site
         </a>
       </div>
     </div>
 
     <div class="brand-card">
       <div class="card-image-wrap">
-        <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80" alt="Stokke bath" onerror="this.style.display='none'">
+        <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80" onerror="this.style.display='none'">
         <div class="img-fallback">ST</div>
         <span class="tier-badge tier-luxury">Luxury</span>
       </div>
       <div class="card-body">
-        <div class="brand-name">Stokke</div>
-        <div class="brand-origin">Norway · Est. 1932 · Luxury baby brand</div>
-        <div class="brand-desc">The luxury benchmark for baby bathing. Flexi Bath (foldable tub) is the gold standard — AED 180–220 on UAE marketplaces. Iconic Scandinavian minimal packaging. Nimova's FoldBath Newborn Tub should be benchmarked against this at half the price.</div>
+        <div class="brand-name">Stokke Flexi Bath</div>
+        <div class="brand-origin">Norway · Est. 1932 · Luxury baby benchmark</div>
+        <div class="brand-desc">Gold standard for foldable baby tubs. AED 180–220 on UAE marketplaces. Scandi minimal box packaging. Nimova FoldBath Newborn Tub benchmarks against this at half the price — same fold-flat story, UAE apartment angle.</div>
         <div class="brand-stats">
           <div class="stat"><div class="stat-label">Price (AED)</div><div class="stat-value">AED 180–350</div></div>
           <div class="stat"><div class="stat-label">Rating</div><div class="stat-value">4.8★ avg</div></div>
-          <div class="stat"><div class="stat-label">Packaging</div><div class="stat-value">Minimal Scandi box</div></div>
+          <div class="stat"><div class="stat-label">Box Style</div><div class="stat-value">Minimal Scandi box</div></div>
           <div class="stat"><div class="stat-label">UAE Presence</div><div class="stat-value">BabyShop + Amazon.ae</div></div>
         </div>
-        <div class="pkg-label">Packaging Style</div>
-        <div class="pkg-desc">Stark white box with single product photo. Stokke logo, one line of copy. Zero clutter. Conveys premium through restraint. The "folds flat" feature is central to UAE apartment positioning — something Nimova FoldBath can own at the AED 95–130 tier.</div>
+        <div class="pkg-label">Box Look & Feel</div>
+        <div class="pkg-desc">Stark white box, single product photo, Stokke logo, one headline — done. Zero clutter. Conveys premium through restraint. The "folds flat" feature is central to UAE apartment positioning Nimova FoldBath can own at AED 95–130.</div>
         <div class="tag-row">
-          <span class="tag highlight">Flexi Bath = gold standard</span>
-          <span class="tag">Scandi minimal packaging</span>
-          <span class="tag">Fold-flat product story</span>
+          <span class="tag highlight">FoldBath design blueprint</span>
+          <span class="tag">Scandi minimal white box</span>
           <span class="tag warning">Out of Nimova price range</span>
         </div>
-        <a class="learn-link" href="https://www.stokke.com/en-ae/baby-bath/flexi-bath" target="_blank">
-          View brand <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 10L10 2M10 2H5M10 2v5"/></svg>
+      </div>
+      <div class="packaging-section">
+        <div class="pkg-section-title">📦 Packaging Reference</div>
+        <div class="pkg-gallery">
+          <a href="https://www.amazon.com/s?k=stokke+flexi+bath+foldable" target="_blank">
+            <img src="https://m.media-amazon.com/images/I/71XdU4EbFRL._AC_SL1500_.jpg" onerror="this.src='https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&q=60'">
+            <div class="gallery-label">Flexi Bath Box</div>
+          </a>
+          <a href="https://www.amazon.com/s?k=stokke+flexi+bath+foldable" target="_blank">
+            <img src="https://m.media-amazon.com/images/I/71u8K-oODrL._AC_SL1500_.jpg" onerror="this.src='https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=300&q=60'">
+            <div class="gallery-label">More box images on Amazon →</div>
+          </a>
+        </div>
+      </div>
+      <div class="card-actions">
+        <a class="action-btn btn-video" href="https://www.youtube.com/results?search_query=Stokke+Flexi+Bath+unboxing+packaging+box+review" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.5A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.8 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+          Unboxing Videos
         </a>
-      </div>
-    </div>
-
-    <div class="brand-card">
-      <div class="card-image-wrap">
-        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="Munchkin bath" onerror="this.style.display='none'">
-        <div class="img-fallback">Mc</div>
-        <span class="tier-badge tier-mid">Mid-Market</span>
-      </div>
-      <div class="card-body">
-        <div class="brand-name">Munchkin (Bath)</div>
-        <div class="brand-origin">USA · Bath line of the global feeding leader</div>
-        <div class="brand-desc">Munchkin's bath range (bath kneelers, rinser cups, organisers) extends the brand's mid-premium positioning into the bath category. White Hot® safety technology is a key differentiator. Reliable packaging consistency across categories — gives the brand authority on shelf.</div>
-        <div class="brand-stats">
-          <div class="stat"><div class="stat-label">Price (AED)</div><div class="stat-value">AED 55–140</div></div>
-          <div class="stat"><div class="stat-label">Rating</div><div class="stat-value">4.5★ avg</div></div>
-          <div class="stat"><div class="stat-label">Packaging</div><div class="stat-value">White windowed box</div></div>
-          <div class="stat"><div class="stat-label">UAE Presence</div><div class="stat-value">Noon + Amazon.ae</div></div>
-        </div>
-        <div class="pkg-label">Packaging Style</div>
-        <div class="pkg-desc">Consistent brand system — white base, product-colour accents, windowed box. Strong lifestyle imagery. "White Hot" safety badge prominent on front. Trustworthy and recognisable. Nimova KneeEase packaging should match this credibility at a warmer, more gifting-friendly tone.</div>
-        <div class="tag-row">
-          <span class="tag">Brand consistency cross-category</span>
-          <span class="tag highlight">Safety tech differentiator</span>
-          <span class="tag warning">Generic visual warmth</span>
-        </div>
-        <a class="learn-link" href="https://www.munchkin.com/bath" target="_blank">
-          View brand <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 10L10 2M10 2H5M10 2v5"/></svg>
+        <a class="action-btn btn-amazon" href="https://www.amazon.com/s?k=stokke+flexi+bath" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+          All Box Images
+        </a>
+        <a class="action-btn btn-brand btn-full" href="https://www.stokke.com/en-ae/baby-bath/flexi-bath" target="_blank">
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 10L10 2M10 2H5M10 2v5"/></svg>
+          Visit Brand Site (UAE)
         </a>
       </div>
     </div>
@@ -692,122 +544,176 @@
   </div>
 
   <div class="positioning-row">
-    <div class="pos-item">
-      <div class="pos-label">Nimova vs. Market</div>
-      <div class="pos-title">Half the price of Stokke, all the story</div>
-      <div class="pos-desc">Stokke FoldBath at AED 180–220 is out of reach for most UAE buyers. Nimova FoldBath at AED 95–130 owns the accessible premium fold-flat story.</div>
-    </div>
-    <div class="pos-item">
-      <div class="pos-label">Hook to Own</div>
-      <div class="pos-title">"Built for UAE apartments"</div>
-      <div class="pos-desc">No competitor uses this angle. Fold-flat + compact storage is directly relevant to Dubai/Abu Dhabi apartment living. A listing headline no one else has.</div>
-    </div>
-    <div class="pos-item">
-      <div class="pos-label">Packaging Signal</div>
-      <div class="pos-title">Parent as the hero</div>
-      <div class="pos-desc">Frida Baby proved copy-led packaging wins hearts. Nimova KneeEase: "Because the floor is not your friend." Gift-for-the-parent angle = unique on shelf.</div>
-    </div>
+    <div class="pos-item"><div class="pos-label">Nimova vs. Market</div><div class="pos-title">Half the price of Stokke, all the story</div><div class="pos-desc">Stokke FoldBath at AED 180–220 is out of reach. Nimova FoldBath at AED 95–130 owns the accessible premium fold-flat story.</div></div>
+    <div class="pos-item"><div class="pos-label">Hook to Own</div><div class="pos-title">"Built for UAE apartments"</div><div class="pos-desc">No competitor uses this angle. Fold-flat + compact storage is directly relevant to Dubai/Abu Dhabi apartment living.</div></div>
+    <div class="pos-item"><div class="pos-label">Packaging Signal</div><div class="pos-title">Parent as the hero</div><div class="pos-desc">Frida Baby proved copy-led packaging wins hearts. Nimova KneeEase: "Because the floor is not your friend."</div></div>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════════════════ TRAVEL -->
+<!-- ══════════ TRAVEL ══════════ -->
 <div id="travel" class="section">
   <div class="cat-label">Category 03</div>
   <h2 class="section-title">Travel & On-The-Go</h2>
   <p class="section-sub">Diaper backpacks · stroller organisers · travel essentials</p>
-
-  <div class="nimova-note">
-    <strong>Nimova Opportunity:</strong> The UAE diaper bag market is dominated by Bebi on Noon (AED 95–150, functional but zero design story) and Skip Hop stroller organisers (AED 139, strong brand but no mid-range). Nimova's <strong>DayCarry Diaper Backpack</strong> (AED 145–185) and <strong>StrollKit Organizer</strong> (AED 65–85) are positioned as the only styled, branded options for parents who don't want "a bag that screams diaper bag."
-  </div>
+  <div class="nimova-note"><strong>Nimova Opportunity:</strong> The UAE diaper bag market is dominated by Bebi on Noon (functional, zero design story) and Skip Hop (strong brand, above mid-range). Nimova's <strong>DayCarry Diaper Backpack</strong> (AED 145–185) and <strong>StrollKit Organizer</strong> (AED 65–85) are the only styled, branded options — "the bag that doesn't scream diaper bag."</div>
 
   <div class="brand-grid">
 
     <div class="brand-card">
       <div class="card-image-wrap">
-        <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&q=80" alt="Skip Hop bag" onerror="this.style.display='none'">
+        <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&q=80" onerror="this.style.display='none'">
         <div class="img-fallback">SH</div>
         <span class="tier-badge tier-premium">Premium</span>
       </div>
       <div class="card-body">
         <div class="brand-name">Skip Hop</div>
         <div class="brand-origin">USA · Dominant travel brand in UAE baby market</div>
-        <div class="brand-desc">Iconic Forma backpack and Grab & Go stroller organiser are the benchmark products. Recognisable chevron prints and signature colour families. The stroller organiser (AED 139) is the reference product for Nimova's StrollKit. Premium but not out of reach.</div>
+        <div class="brand-desc">Iconic Forma backpack and Grab & Go stroller organiser. The stroller organiser (AED 139) is the reference product for Nimova's StrollKit. Premium packaging with lifestyle photography.</div>
         <div class="brand-stats">
           <div class="stat"><div class="stat-label">Price (AED)</div><div class="stat-value">AED 139–380</div></div>
           <div class="stat"><div class="stat-label">Rating</div><div class="stat-value">4.6★ avg</div></div>
-          <div class="stat"><div class="stat-label">Packaging</div><div class="stat-value">Illustrated hang tag</div></div>
+          <div class="stat"><div class="stat-label">Box Style</div><div class="stat-value">Hang tag + poly bag</div></div>
           <div class="stat"><div class="stat-label">UAE Presence</div><div class="stat-value">Noon + BabyShop</div></div>
         </div>
-        <div class="pkg-label">Packaging Style</div>
-        <div class="pkg-desc">Hang tag with logo + lifestyle photography. Clean branded poly bag for bags. Stroller organiser comes with illustrated insert card. Premium but not over-packaged. Nimova StrollKit should match this quality feel at AED 65–85 with a branded gift box insert.</div>
+        <div class="pkg-label">Box Look & Feel</div>
+        <div class="pkg-desc">Hang tag with logo + lifestyle photography. Clean branded poly bag. Stroller organiser comes with illustrated brand insert card. Premium but not over-packaged. Nimova StrollKit should match this quality at AED 65–85.</div>
         <div class="tag-row">
-          <span class="tag highlight">Category benchmark product</span>
-          <span class="tag">Iconic prints</span>
+          <span class="tag highlight">StrollKit benchmark</span>
           <span class="tag">Lifestyle photography standard</span>
           <span class="tag warning">Above Nimova price for bags</span>
         </div>
-        <a class="learn-link" href="https://www.skiphop.com/pages/diaper-bags" target="_blank">
-          View brand <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 10L10 2M10 2H5M10 2v5"/></svg>
+      </div>
+      <div class="packaging-section">
+        <div class="pkg-section-title">📦 Packaging Reference</div>
+        <div class="pkg-gallery">
+          <a href="https://www.amazon.com/s?k=skip+hop+stroller+organizer" target="_blank">
+            <img src="https://m.media-amazon.com/images/I/71nllUl4WYL._AC_SL1500_.jpg" onerror="this.src='https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=300&q=60'">
+            <div class="gallery-label">Stroller Organiser Packaging</div>
+          </a>
+          <a href="https://www.amazon.com/s?k=skip+hop+diaper+bag+backpack" target="_blank">
+            <img src="https://m.media-amazon.com/images/I/71EhYk2BPEL._AC_SL1500_.jpg" onerror="this.src='https://images.unsplash.com/photo-1547949003-9792a18a2601?w=300&q=60'">
+            <div class="gallery-label">Diaper Bag Packaging</div>
+          </a>
+        </div>
+      </div>
+      <div class="card-actions">
+        <a class="action-btn btn-video" href="https://www.youtube.com/results?search_query=Skip+Hop+diaper+bag+stroller+organizer+unboxing+packaging" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.5A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.8 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+          Unboxing Videos
+        </a>
+        <a class="action-btn btn-amazon" href="https://www.amazon.com/s?k=skip+hop+stroller+organizer" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+          All Box Images
+        </a>
+        <a class="action-btn btn-brand btn-full" href="https://www.skiphop.com/pages/diaper-bags" target="_blank">
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 10L10 2M10 2H5M10 2v5"/></svg>
+          Visit Brand Site
         </a>
       </div>
     </div>
 
     <div class="brand-card">
       <div class="card-image-wrap">
-        <img src="https://images.unsplash.com/photo-1547949003-9792a18a2601?w=600&q=80" alt="Storksak bag" onerror="this.style.display='none'">
+        <img src="https://images.unsplash.com/photo-1547949003-9792a18a2601?w=600&q=80" onerror="this.style.display='none'">
         <div class="img-fallback">SK</div>
         <span class="tier-badge tier-luxury">Luxury</span>
       </div>
       <div class="card-body">
         <div class="brand-name">Storksak</div>
         <div class="brand-origin">UK · Est. 2002 · Luxury diaper bags</div>
-        <div class="brand-desc">The luxury benchmark for structured, stylish diaper bags. Oxford fabric, gold-tone hardware, structured silhouette — looks like a designer handbag. Nimova's DayCarry design brief (Dusk Blue, gold hardware, structured) is directly inspired by Storksak's aesthetic at a 60% lower price.</div>
+        <div class="brand-desc">The luxury benchmark. Oxford fabric, gold-tone hardware — looks like a designer handbag. Nimova's DayCarry (Dusk Blue, gold hardware, structured) is directly inspired by Storksak at 60% lower price.</div>
         <div class="brand-stats">
           <div class="stat"><div class="stat-label">Price (AED)</div><div class="stat-value">AED 350–900</div></div>
           <div class="stat"><div class="stat-label">Rating</div><div class="stat-value">4.7★ avg</div></div>
-          <div class="stat"><div class="stat-label">Packaging</div><div class="stat-value">Luxury dust bag + box</div></div>
+          <div class="stat"><div class="stat-label">Box Style</div><div class="stat-value">Luxury dust bag + box</div></div>
           <div class="stat"><div class="stat-label">UAE Presence</div><div class="stat-value">Boutiques + online</div></div>
         </div>
-        <div class="pkg-label">Packaging Style</div>
-        <div class="pkg-desc">Luxury dust bag, branded box with tissue paper. Feels like a fashion handbag purchase. Nimova DayCarry can borrow the "looks like a bag, works like a diaper bag" story and deliver it at AED 145–185 — a massive value gap to own.</div>
+        <div class="pkg-label">Box Look & Feel</div>
+        <div class="pkg-desc">Luxury dust bag, branded box, tissue paper. Feels like a fashion handbag purchase. Nimova DayCarry can own the "looks like a bag, works like a diaper bag" story at AED 145–185 — a massive value gap.</div>
         <div class="tag-row">
-          <span class="tag highlight">Design blueprint for DayCarry</span>
+          <span class="tag highlight">DayCarry design blueprint</span>
           <span class="tag">Gold hardware signature</span>
-          <span class="tag">Luxury unboxing</span>
           <span class="tag warning">Out of UAE mass market</span>
         </div>
-        <a class="learn-link" href="https://www.storksak.com" target="_blank">
-          View brand <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 10L10 2M10 2H5M10 2v5"/></svg>
+      </div>
+      <div class="packaging-section">
+        <div class="pkg-section-title">📦 Packaging Reference</div>
+        <div class="pkg-gallery">
+          <a href="https://www.amazon.com/s?k=storksak+diaper+bag" target="_blank">
+            <img src="https://m.media-amazon.com/images/I/71YHpRVfxYL._AC_SL1500_.jpg" onerror="this.src='https://images.unsplash.com/photo-1591981823827-f25ba2e76a12?w=300&q=60'">
+            <div class="gallery-label">Luxury Bag Packaging</div>
+          </a>
+          <a href="https://www.amazon.com/s?k=storksak+diaper+bag" target="_blank">
+            <img src="https://m.media-amazon.com/images/I/61yX3K4FIAL._AC_SL1500_.jpg" onerror="this.src='https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=300&q=60'">
+            <div class="gallery-label">More images on Amazon →</div>
+          </a>
+        </div>
+      </div>
+      <div class="card-actions">
+        <a class="action-btn btn-video" href="https://www.youtube.com/results?search_query=Storksak+diaper+bag+unboxing+packaging+review" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.5A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.8 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+          Unboxing Videos
+        </a>
+        <a class="action-btn btn-amazon" href="https://www.amazon.com/s?k=storksak+diaper+bag" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+          All Box Images
+        </a>
+        <a class="action-btn btn-brand btn-full" href="https://www.storksak.com" target="_blank">
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 10L10 2M10 2H5M10 2v5"/></svg>
+          Visit Brand Site
         </a>
       </div>
     </div>
 
     <div class="brand-card">
       <div class="card-image-wrap">
-        <img src="https://images.unsplash.com/photo-1591981823827-f25ba2e76a12?w=600&q=80" alt="Beaba bag" onerror="this.style.display='none'">
+        <img src="https://images.unsplash.com/photo-1591981823827-f25ba2e76a12?w=600&q=80" onerror="this.style.display='none'">
         <div class="img-fallback">bé</div>
         <span class="tier-badge tier-premium">Premium</span>
       </div>
       <div class="card-body">
         <div class="brand-name">Béaba</div>
-        <div class="brand-origin">France · Est. 1989 · Stylish functional baby brand</div>
-        <div class="brand-desc">French brand known for stylish, minimalist baby products. Changing bags and organisers with a clean European aesthetic. Growing presence on Amazon.ae. Colour palette (grey, sage, slate) directly overlaps with Nimova's visual territory. Strong reference point for styling the DayCarry.</div>
+        <div class="brand-origin">France · Est. 1989 · Stylish European baby brand</div>
+        <div class="brand-desc">French brand with clean European aesthetic. Changing bags and organisers in grey, sage, slate — directly overlaps with Nimova's visual territory. Closest palette reference for DayCarry colour story.</div>
         <div class="brand-stats">
           <div class="stat"><div class="stat-label">Price (AED)</div><div class="stat-value">AED 200–450</div></div>
           <div class="stat"><div class="stat-label">Rating</div><div class="stat-value">4.5★ avg</div></div>
-          <div class="stat"><div class="stat-label">Packaging</div><div class="stat-value">Branded box + tissue</div></div>
+          <div class="stat"><div class="stat-label">Box Style</div><div class="stat-value">Branded box + tissue</div></div>
           <div class="stat"><div class="stat-label">UAE Presence</div><div class="stat-value">Amazon.ae + BabyShop</div></div>
         </div>
-        <div class="pkg-label">Packaging Style</div>
-        <div class="pkg-desc">Clean white branded box with sage/slate accent, tissue paper, and a brand story card. Packaging reinforces the premium-but-not-intimidating positioning. Sage colourway is very close to Nimova's Dusty Sage — easy to draw design parallels in listing imagery.</div>
+        <div class="pkg-label">Box Look & Feel</div>
+        <div class="pkg-desc">Clean white branded box, sage/slate accent, tissue paper, brand story card inside. Reads as a lifestyle brand, not a baby brand. Sage colourway close to Nimova's Dusty Sage — strong design parallel.</div>
         <div class="tag-row">
           <span class="tag highlight">Closest palette to Nimova</span>
-          <span class="tag">European minimal aesthetic</span>
-          <span class="tag">Brand story insert</span>
+          <span class="tag">Brand story insert card</span>
           <span class="tag warning">Higher price barrier</span>
         </div>
-        <a class="learn-link" href="https://www.beabausa.com/collections/diaper-bags" target="_blank">
-          View brand <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 10L10 2M10 2H5M10 2v5"/></svg>
+      </div>
+      <div class="packaging-section">
+        <div class="pkg-section-title">📦 Packaging Reference</div>
+        <div class="pkg-gallery">
+          <a href="https://www.amazon.com/s?k=beaba+changing+bag" target="_blank">
+            <img src="https://m.media-amazon.com/images/I/71EqpL7SPNL._AC_SL1500_.jpg" onerror="this.src='https://images.unsplash.com/photo-1547949003-9792a18a2601?w=300&q=60'">
+            <div class="gallery-label">Changing Bag Box</div>
+          </a>
+          <a href="https://www.amazon.com/s?k=beaba+changing+bag" target="_blank">
+            <img src="https://m.media-amazon.com/images/I/71ZvJiCYXWL._AC_SL1500_.jpg" onerror="this.src='https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=300&q=60'">
+            <div class="gallery-label">More images on Amazon →</div>
+          </a>
+        </div>
+      </div>
+      <div class="card-actions">
+        <a class="action-btn btn-video" href="https://www.youtube.com/results?search_query=Beaba+changing+bag+unboxing+packaging+review" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.5A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.8 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+          Unboxing Videos
+        </a>
+        <a class="action-btn btn-amazon" href="https://www.amazon.com/s?k=beaba+changing+bag" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+          All Box Images
+        </a>
+        <a class="action-btn btn-brand btn-full" href="https://www.beabausa.com/collections/diaper-bags" target="_blank">
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 10L10 2M10 2H5M10 2v5"/></svg>
+          Visit Brand Site
         </a>
       </div>
     </div>
@@ -815,152 +721,178 @@
   </div>
 
   <div class="positioning-row">
-    <div class="pos-item">
-      <div class="pos-label">Nimova DayCarry</div>
-      <div class="pos-title">Storksak aesthetic, Skip Hop price</div>
-      <div class="pos-desc">Structured Dusk Blue bag, gold-tone hardware, woven Nimova label. AED 145–185. The only styled diaper backpack in this price tier on UAE marketplaces.</div>
-    </div>
-    <div class="pos-item">
-      <div class="pos-label">Listing Hook</div>
-      <div class="pos-title">"Doesn't look like a diaper bag"</div>
-      <div class="pos-desc">Every competing listing shows dads with tactical-grey utility bags. Nimova shows a parent at a café or Dubai mall. Lifestyle photography is the differentiator.</div>
-    </div>
-    <div class="pos-item">
-      <div class="pos-label">Bundle Play</div>
-      <div class="pos-title">Nimova Travel Duo</div>
-      <div class="pos-desc">DayCarry + StrollKit bundled as "Nimova Travel Duo" — AED 200–260. No competitor offers a matched set in this style tier. Creates a unique virtual bundle on Amazon.</div>
-    </div>
+    <div class="pos-item"><div class="pos-label">Nimova DayCarry</div><div class="pos-title">Storksak aesthetic, Skip Hop price</div><div class="pos-desc">Structured Dusk Blue, gold hardware, woven label. AED 145–185. Only styled diaper backpack in this price tier on UAE marketplaces.</div></div>
+    <div class="pos-item"><div class="pos-label">Listing Hook</div><div class="pos-title">"Doesn't look like a diaper bag"</div><div class="pos-desc">Every competing listing shows utility grey bags. Nimova shows a parent at a Dubai café. Lifestyle photography is the entire differentiator.</div></div>
+    <div class="pos-item"><div class="pos-label">Bundle Play</div><div class="pos-title">Nimova Travel Duo</div><div class="pos-desc">DayCarry + StrollKit at AED 200–260. No competitor offers a matched set in this style tier. Unique virtual bundle on Amazon.</div></div>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════════════════ NURSERY -->
+<!-- ══════════ NURSERY ══════════ -->
 <div id="nursery" class="section">
   <div class="cat-label">Category 04</div>
   <h2 class="section-title">Nursery & Storage</h2>
   <p class="section-sub">Cotton rope caddies · storage baskets · changing organisers</p>
-
-  <div class="nimova-note">
-    <strong>Nimova Opportunity:</strong> The nursery caddy and storage basket segment on Amazon.ae is the single weakest branded category in UAE baby non-consumables. Cotton rope baskets are trending strongly (boho-nursery aesthetic), but every listing is generic with zero brand story. Nimova's <strong>NestCaddy</strong> (AED 75–95) and <strong>NestBasket Storage Set</strong> (AED 85–120 for 3-pc) can become the only branded mid-premium nursery storage line on the platform.
-  </div>
+  <div class="nimova-note"><strong>Nimova Opportunity:</strong> Every cotton rope basket listing on Amazon.ae is generic with zero brand story. Nimova's <strong>NestCaddy</strong> (AED 75–95) and <strong>NestBasket Storage Set</strong> (AED 85–120 for 3-pc) can become the only branded mid-premium nursery storage line on the platform.</div>
 
   <div class="brand-grid">
 
     <div class="brand-card">
       <div class="card-image-wrap">
-        <img src="https://images.unsplash.com/photo-1556909172-54557c7e4fb7?w=600&q=80" alt="The Little Green Sheep nursery" onerror="this.style.display='none'">
-        <div class="img-fallback">LG</div>
-        <span class="tier-badge tier-premium">Premium</span>
-      </div>
-      <div class="card-body">
-        <div class="brand-name">The Little Green Sheep</div>
-        <div class="brand-origin">UK · Est. 2008 · Organic nursery specialist</div>
-        <div class="brand-desc">Organic-first nursery brand. Baskets, blankets, mattresses in warm neutral tones. Strong gifting positioning — every product looks like it belongs in a luxury nursery flatlay. Not widely stocked in UAE but sets the aspirational visual benchmark for Nimova NestBasket.</div>
-        <div class="brand-stats">
-          <div class="stat"><div class="stat-label">Price (AED)</div><div class="stat-value">AED 150–380</div></div>
-          <div class="stat"><div class="stat-label">Rating</div><div class="stat-value">4.7★ avg</div></div>
-          <div class="stat"><div class="stat-label">Packaging</div><div class="stat-value">Kraft gift box + ribbon</div></div>
-          <div class="stat"><div class="stat-label">UAE Presence</div><div class="stat-value">Limited online import</div></div>
-        </div>
-        <div class="pkg-label">Packaging Style</div>
-        <div class="pkg-desc">Natural kraft box with ribbon, brand story insert, and earthy colour palette. Every piece packaged to be gifted. Nimova NestCaddy packaging should aspire to this tone — warm white box, amber band, brand story on the inside lid — at the AED 75–95 price point.</div>
-        <div class="tag-row">
-          <span class="tag highlight">Gifting benchmark for Nursery</span>
-          <span class="tag">Organic / natural story</span>
-          <span class="tag">Brand story on packaging insert</span>
-          <span class="tag warning">Largely absent UAE market</span>
-        </div>
-        <a class="learn-link" href="https://www.thelittlegreensheep.co.uk" target="_blank">
-          View brand <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 10L10 2M10 2H5M10 2v5"/></svg>
-        </a>
-      </div>
-    </div>
-
-    <div class="brand-card">
-      <div class="card-image-wrap">
-        <img src="https://images.unsplash.com/photo-1586105251261-72a756497a11?w=600&q=80" alt="Lorena Canals nursery" onerror="this.style.display='none'">
+        <img src="https://images.unsplash.com/photo-1586105251261-72a756497a11?w=600&q=80" onerror="this.style.display='none'">
         <div class="img-fallback">LC</div>
         <span class="tier-badge tier-luxury">Luxury</span>
       </div>
       <div class="card-body">
         <div class="brand-name">Lorena Canals</div>
         <div class="brand-origin">Spain · Est. 1998 · Design-led nursery textiles</div>
-        <div class="brand-desc">The luxury benchmark for cotton rope nursery baskets. Machine-washable, artisan-crafted, highly Instagrammable. Sets the visual standard for the cotton rope basket category globally. AED 200–450 — well above Nimova's tier, but the design language (natural rope, neutral, minimal branding) is the exact aesthetic Nimova NestBasket should own at an accessible price.</div>
+        <div class="brand-desc">Luxury benchmark for cotton rope nursery baskets. Machine-washable, artisan-crafted. The design language and packaging philosophy is exactly what NestBasket should own at half the price.</div>
         <div class="brand-stats">
           <div class="stat"><div class="stat-label">Price (AED)</div><div class="stat-value">AED 200–450</div></div>
           <div class="stat"><div class="stat-label">Rating</div><div class="stat-value">4.8★ avg</div></div>
-          <div class="stat"><div class="stat-label">Packaging</div><div class="stat-value">Branded cotton bag</div></div>
+          <div class="stat"><div class="stat-label">Box Style</div><div class="stat-value">Branded cotton dust bag</div></div>
           <div class="stat"><div class="stat-label">UAE Presence</div><div class="stat-value">Select retailers only</div></div>
         </div>
-        <div class="pkg-label">Packaging Style</div>
-        <div class="pkg-desc">Product arrives in a branded cotton storage bag — the packaging itself is usable. Minimal printed label, natural materials throughout. Zero plastic. Nimova NestBasket can adopt the "packaging you keep" angle with a branded cotton dust bag as the outer packaging — unique for the price tier.</div>
+        <div class="pkg-label">Box Look & Feel</div>
+        <div class="pkg-desc">Product arrives in a branded cotton storage bag — the packaging itself is usable. Minimal printed label, natural materials, zero plastic. Nimova NestBasket can adopt "packaging you keep" with a branded cotton dust bag — unique for the price tier.</div>
         <div class="tag-row">
-          <span class="tag highlight">Design blueprint for NestBasket</span>
-          <span class="tag">Machine-washable story</span>
+          <span class="tag highlight">NestBasket design blueprint</span>
           <span class="tag">Packaging you keep</span>
-          <span class="tag warning">Way above Nimova price tier</span>
+          <span class="tag">Zero plastic packaging</span>
+          <span class="tag warning">Way above Nimova price</span>
         </div>
-        <a class="learn-link" href="https://www.lorenacanals.com/en/baskets-and-storage" target="_blank">
-          View brand <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 10L10 2M10 2H5M10 2v5"/></svg>
+      </div>
+      <div class="packaging-section">
+        <div class="pkg-section-title">📦 Packaging Reference</div>
+        <div class="pkg-gallery">
+          <a href="https://www.amazon.com/s?k=lorena+canals+basket+nursery" target="_blank">
+            <img src="https://m.media-amazon.com/images/I/81C1cDuMWyL._AC_SL1500_.jpg" onerror="this.src='https://images.unsplash.com/photo-1523473827533-2a64d0d36748?w=300&q=60'">
+            <div class="gallery-label">Cotton Dust Bag Packaging</div>
+          </a>
+          <a href="https://www.amazon.com/s?k=lorena+canals+basket+nursery" target="_blank">
+            <img src="https://m.media-amazon.com/images/I/71mNz8ZrEwL._AC_SL1500_.jpg" onerror="this.src='https://images.unsplash.com/photo-1556909172-54557c7e4fb7?w=300&q=60'">
+            <div class="gallery-label">More images on Amazon →</div>
+          </a>
+        </div>
+      </div>
+      <div class="card-actions">
+        <a class="action-btn btn-video" href="https://www.youtube.com/results?search_query=Lorena+Canals+basket+unboxing+packaging+nursery" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.5A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.8 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+          Unboxing Videos
+        </a>
+        <a class="action-btn btn-amazon" href="https://www.amazon.com/s?k=lorena+canals+basket" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l7-4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+          All Box Images
+        </a>
+        <a class="action-btn btn-brand btn-full" href="https://www.lorenacanals.com/en/baskets-and-storage" target="_blank">
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 10L10 2M10 2H5M10 2v5"/></svg>
+          Visit Brand Site
         </a>
       </div>
     </div>
 
     <div class="brand-card">
       <div class="card-image-wrap">
-        <img src="https://images.unsplash.com/photo-1523473827533-2a64d0d36748?w=600&q=80" alt="3 Sprouts nursery" onerror="this.style.display='none'">
+        <img src="https://images.unsplash.com/photo-1523473827533-2a64d0d36748?w=600&q=80" onerror="this.style.display='none'">
         <div class="img-fallback">3S</div>
         <span class="tier-badge tier-mid">Mid-Market</span>
       </div>
       <div class="card-body">
         <div class="brand-name">3 Sprouts</div>
         <div class="brand-origin">Canada · Est. 2009 · Playful storage brand</div>
-        <div class="brand-desc">Widely available on Amazon.ae and Noon. Known for character-themed hampers and storage boxes (fox, bear, hedgehog). Colourful and playful. Strong Noon presence in the nursery storage category. Nimova NestCaddy is a warmer, more gifting-focused alternative to 3 Sprouts' playful-but-generic positioning.</div>
+        <div class="brand-desc">Widely available on Amazon.ae and Noon. Character-themed hampers. Fun but not premium. Nimova NestCaddy immediately reads more premium in the same price range with its warm palette and woven label.</div>
         <div class="brand-stats">
           <div class="stat"><div class="stat-label">Price (AED)</div><div class="stat-value">AED 65–140</div></div>
           <div class="stat"><div class="stat-label">Rating</div><div class="stat-value">4.3★ avg</div></div>
-          <div class="stat"><div class="stat-label">Packaging</div><div class="stat-value">Window box, character art</div></div>
+          <div class="stat"><div class="stat-label">Box Style</div><div class="stat-value">Window box, character art</div></div>
           <div class="stat"><div class="stat-label">UAE Presence</div><div class="stat-value">Noon + Amazon.ae</div></div>
         </div>
-        <div class="pkg-label">Packaging Style</div>
-        <div class="pkg-desc">Colourful windowed box with character illustration. Fun but not premium. Baby shower gifting is a key use case but the packaging doesn't quite deliver. Nimova NestCaddy with its woven cotton rope, warm white palette, and branded label immediately reads as more premium in the same price range.</div>
+        <div class="pkg-label">Box Look & Feel</div>
+        <div class="pkg-desc">Colourful windowed box with character illustration. Fun but not premium. Baby shower gifting is the key use case but the packaging doesn't quite deliver. Nimova's warm palette and branded label makes a strong contrast.</div>
         <div class="tag-row">
           <span class="tag">Strong Noon UAE presence</span>
-          <span class="tag">Baby shower positioning</span>
           <span class="tag warning">Playful not premium</span>
           <span class="tag warning">Generic character designs</span>
         </div>
-        <a class="learn-link" href="https://www.3sprouts.com/collections/hampers-storage" target="_blank">
-          View brand <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 10L10 2M10 2H5M10 2v5"/></svg>
+      </div>
+      <div class="packaging-section">
+        <div class="pkg-section-title">📦 Packaging Reference</div>
+        <div class="pkg-gallery">
+          <a href="https://www.amazon.com/s?k=3+sprouts+hamper+storage" target="_blank">
+            <img src="https://m.media-amazon.com/images/I/81NlBzWv7YL._AC_SL1500_.jpg" onerror="this.src='https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=300&q=60'">
+            <div class="gallery-label">Hamper Window Box</div>
+          </a>
+          <a href="https://www.amazon.com/s?k=3+sprouts+hamper+storage" target="_blank">
+            <img src="https://m.media-amazon.com/images/I/71kSqz45aNL._AC_SL1500_.jpg" onerror="this.src='https://images.unsplash.com/photo-1586105251261-72a756497a11?w=300&q=60'">
+            <div class="gallery-label">More images on Amazon →</div>
+          </a>
+        </div>
+      </div>
+      <div class="card-actions">
+        <a class="action-btn btn-video" href="https://www.youtube.com/results?search_query=3+Sprouts+storage+hamper+unboxing+nursery+packaging" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.5A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.8 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+          Unboxing Videos
+        </a>
+        <a class="action-btn btn-amazon" href="https://www.amazon.com/s?k=3+sprouts+hamper+storage" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+          All Box Images
+        </a>
+        <a class="action-btn btn-brand btn-full" href="https://www.3sprouts.com/collections/hampers-storage" target="_blank">
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 10L10 2M10 2H5M10 2v5"/></svg>
+          Visit Brand Site
         </a>
       </div>
     </div>
 
     <div class="brand-card">
       <div class="card-image-wrap">
-        <img src="https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=600&q=80" alt="Pottery Barn Kids nursery" onerror="this.style.display='none'">
+        <img src="https://images.unsplash.com/photo-1484101403633-562f891dc89a?w=600&q=80" onerror="this.style.display='none'">
         <div class="img-fallback">PB</div>
         <span class="tier-badge tier-luxury">Luxury</span>
       </div>
       <div class="card-body">
         <div class="brand-name">Pottery Barn Kids</div>
         <div class="brand-origin">USA · Est. 1999 · Aspirational nursery lifestyle</div>
-        <div class="brand-desc">The aspirational benchmark for nursery aesthetics in the UAE (strong presence in Mall of the Emirates). Cotton rope baskets, woven caddies, and storage sets in Nimova's exact colour territory (warm white, sage, blush). Not on UAE marketplaces — but parents who browse PBK are Nimova's exact customer.</div>
+        <div class="brand-desc">The aspirational benchmark in UAE (Mall of the Emirates). Cotton rope baskets in Nimova's exact colour territory. Not on UAE marketplaces — parents who browse PBK are Nimova's exact customer. This is the gap to own on Amazon.ae.</div>
         <div class="brand-stats">
           <div class="stat"><div class="stat-label">Price (AED)</div><div class="stat-value">AED 180–550</div></div>
           <div class="stat"><div class="stat-label">Rating</div><div class="stat-value">4.6★ avg</div></div>
-          <div class="stat"><div class="stat-label">Packaging</div><div class="stat-value">Branded kraft wrapping</div></div>
+          <div class="stat"><div class="stat-label">Box Style</div><div class="stat-value">Kraft wrap + ribbon</div></div>
           <div class="stat"><div class="stat-label">UAE Presence</div><div class="stat-value">MOE store only</div></div>
         </div>
-        <div class="pkg-label">Packaging Style</div>
-        <div class="pkg-desc">Kraft wrap with PBK monogram ribbon. Warm white tissue paper. Packaging reads as a lifestyle brand, not a baby brand. This is the gap Nimova fills on Amazon.ae — the PBK customer who wants that aesthetic but wants to shop online and not pay AED 400 for a basket.</div>
+        <div class="pkg-label">Box Look & Feel</div>
+        <div class="pkg-desc">Kraft wrap with PBK monogram ribbon, warm white tissue paper. Reads as a lifestyle brand, not a baby brand. Nimova fills this gap on Amazon.ae — the PBK customer who wants that aesthetic but shops online.</div>
         <div class="tag-row">
-          <span class="tag highlight">Exact Nimova customer target</span>
+          <span class="tag highlight">Exact Nimova customer</span>
           <span class="tag">Nursery lifestyle aesthetic</span>
           <span class="tag">Absent from UAE marketplaces</span>
           <span class="tag warning">Retail only, premium price</span>
         </div>
-        <a class="learn-link" href="https://www.potterybarnkids.com/shop/storage/baskets-bins/" target="_blank">
-          View brand <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 10L10 2M10 2H5M10 2v5"/></svg>
+      </div>
+      <div class="packaging-section">
+        <div class="pkg-section-title">📦 Packaging Reference</div>
+        <div class="pkg-gallery">
+          <a href="https://www.potterybarnkids.com/shop/storage/baskets-bins/" target="_blank">
+            <img src="https://m.media-amazon.com/images/I/71qLHyeVIBL._AC_SL1500_.jpg" onerror="this.src='https://images.unsplash.com/photo-1523473827533-2a64d0d36748?w=300&q=60'">
+            <div class="gallery-label">Rope Basket Packaging</div>
+          </a>
+          <a href="https://www.youtube.com/results?search_query=Pottery+Barn+Kids+nursery+haul+unboxing" target="_blank">
+            <img src="https://m.media-amazon.com/images/I/81RlvLWQE4L._AC_SL1500_.jpg" onerror="this.src='https://images.unsplash.com/photo-1556909172-54557c7e4fb7?w=300&q=60'">
+            <div class="gallery-label">Brand Style Reference</div>
+          </a>
+        </div>
+      </div>
+      <div class="card-actions">
+        <a class="action-btn btn-video" href="https://www.youtube.com/results?search_query=Pottery+Barn+Kids+nursery+basket+unboxing+packaging" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.5A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.8 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+          Unboxing Videos
+        </a>
+        <a class="action-btn btn-amazon" href="https://www.amazon.com/s?k=pottery+barn+kids+rope+basket" target="_blank">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+          All Box Images
+        </a>
+        <a class="action-btn btn-brand btn-full" href="https://www.potterybarnkids.com/shop/storage/baskets-bins/" target="_blank">
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 10L10 2M10 2H5M10 2v5"/></svg>
+          Visit Brand Site
         </a>
       </div>
     </div>
@@ -968,34 +900,21 @@
   </div>
 
   <div class="positioning-row">
-    <div class="pos-item">
-      <div class="pos-label">The Gap to Own</div>
-      <div class="pos-title">PBK aesthetic on Amazon.ae</div>
-      <div class="pos-desc">Pottery Barn Kids is not on UAE marketplaces. Their exact customer is buying generic cotton rope baskets on Amazon.ae. Nimova NestCaddy is that customer's answer.</div>
-    </div>
-    <div class="pos-item">
-      <div class="pos-label">The 3-Piece Angle</div>
-      <div class="pos-title">No full set exists in UAE</div>
-      <div class="pos-desc">Every competitor sells single baskets. Nimova NestBasket (3-pc graduated sizes, branded woven label) is the only complete nursery storage set in the mid-premium tier on Amazon.ae.</div>
-    </div>
-    <div class="pos-item">
-      <div class="pos-label">Packaging Win</div>
-      <div class="pos-title">Branded label + gift insert</div>
-      <div class="pos-desc">Woven Nimova label tab on every caddy. Warm white box with amber ribbon. Brand story card inside lid. Turns a commodity cotton basket into a gift product — and a Nimova brand touchpoint.</div>
-    </div>
+    <div class="pos-item"><div class="pos-label">The Gap to Own</div><div class="pos-title">PBK aesthetic on Amazon.ae</div><div class="pos-desc">Pottery Barn Kids is not on UAE marketplaces. Their exact customer is buying generic cotton rope baskets on Amazon.ae. Nimova NestCaddy is that customer's answer.</div></div>
+    <div class="pos-item"><div class="pos-label">The 3-Piece Angle</div><div class="pos-title">No full set exists in UAE</div><div class="pos-desc">Every competitor sells single baskets. Nimova NestBasket (3-pc graduated sizes, branded woven label) is the only complete nursery storage set in the mid-premium tier.</div></div>
+    <div class="pos-item"><div class="pos-label">Packaging Win</div><div class="pos-title">Branded label + gift insert</div><div class="pos-desc">Woven Nimova label on every caddy. Warm white box with amber ribbon. Brand story card inside lid. Turns a commodity basket into a gift product.</div></div>
   </div>
 
 </div>
-
 </main>
 
-<footer style="background: var(--charcoal); padding: 32px 64px; margin-top: 40px;">
-  <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
+<footer style="background:var(--charcoal);padding:28px 64px;margin-top:40px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
     <div>
-      <div style="font-family:'Cormorant Garamond',serif; font-size:20px; color:var(--white); font-weight:300;">Nimova</div>
-      <div style="font-size:11px; color:rgba(250,249,247,0.35); letter-spacing:1px; margin-top:4px;">Brand Intelligence · March 2026</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--white);font-weight:300;">Nimova</div>
+      <div style="font-size:11px;color:rgba(250,249,247,.35);letter-spacing:1px;margin-top:4px;">Brand Intelligence · March 2026</div>
     </div>
-    <div style="font-size:11px; color:rgba(250,249,247,0.3);">For internal use only · Owner: Raman</div>
+    <div style="font-size:11px;color:rgba(250,249,247,.3);">For internal use only · Owner: Raman</div>
   </div>
 </footer>
 
@@ -1005,7 +924,6 @@ function showSection(id, tab) {
   document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   tab.classList.add('active');
-  // Re-trigger animations
   document.querySelectorAll('#' + id + ' .brand-card').forEach((card, i) => {
     card.style.animation = 'none';
     card.offsetHeight;
